@@ -1,0 +1,51 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = { relativepath = false; };
+    package = {
+      specVersion = "1.10";
+      identifier = { name = "apelsin"; version = "1.2.1"; };
+      license = "GPL-3.0-only";
+      copyright = "";
+      maintainer = "christoffer@ojeling.net";
+      author = "Christoffer Öjeling";
+      homepage = "";
+      url = "";
+      synopsis = "Server and community browser for the game Tremulous";
+      description = "A gtk2hs server and clan browser for the open source game Tremulous\n<http://tremulous.net>. Both Tremulous 1.1 and GPP are supported.\nFeatures filtering, player search, a list of online clan members,\na clan list and basic perferences.";
+      buildType = "Simple";
+      };
+    components = {
+      exes = {
+        "apelsin" = {
+          depends = [
+            (hsPkgs."base" or (errorHandler.buildDepError "base"))
+            (hsPkgs."array" or (errorHandler.buildDepError "array"))
+            (hsPkgs."mtl" or (errorHandler.buildDepError "mtl"))
+            (hsPkgs."containers" or (errorHandler.buildDepError "containers"))
+            (hsPkgs."transformers" or (errorHandler.buildDepError "transformers"))
+            (hsPkgs."bytestring" or (errorHandler.buildDepError "bytestring"))
+            (hsPkgs."directory" or (errorHandler.buildDepError "directory"))
+            (hsPkgs."filepath" or (errorHandler.buildDepError "filepath"))
+            (hsPkgs."HTTP" or (errorHandler.buildDepError "HTTP"))
+            (hsPkgs."network" or (errorHandler.buildDepError "network"))
+            (hsPkgs."tremulous-query" or (errorHandler.buildDepError "tremulous-query"))
+            (hsPkgs."gtk" or (errorHandler.buildDepError "gtk"))
+            (hsPkgs."glib" or (errorHandler.buildDepError "glib"))
+            (hsPkgs."process" or (errorHandler.buildDepError "process"))
+            (hsPkgs."deepseq" or (errorHandler.buildDepError "deepseq"))
+            (hsPkgs."cpphs" or (errorHandler.buildDepError "cpphs"))
+            (hsPkgs."xdg-basedir" or (errorHandler.buildDepError "xdg-basedir"))
+            ];
+          buildable = true;
+          };
+        };
+      };
+    }

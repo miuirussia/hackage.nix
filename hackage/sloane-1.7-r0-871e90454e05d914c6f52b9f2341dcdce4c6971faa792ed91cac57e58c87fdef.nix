@@ -1,0 +1,46 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = {};
+    package = {
+      specVersion = "1.6";
+      identifier = { name = "sloane"; version = "1.7"; };
+      license = "BSD-3-Clause";
+      copyright = "";
+      maintainer = "anders.claesson@gmail.com";
+      author = "Anders Claesson";
+      homepage = "http://github.com/akc/sloane";
+      url = "";
+      synopsis = "A command line interface to Sloane's On-Line Encyclopedia of Integer Sequences";
+      description = "A command line interface to Sloane's On-Line Encyclopedia of Integer Sequences.\nFor usage see <http://github.com/akc/sloane>.";
+      buildType = "Custom";
+      };
+    components = {
+      exes = {
+        "sloane" = {
+          depends = [
+            (hsPkgs."base" or (errorHandler.buildDepError "base"))
+            (hsPkgs."cmdargs" or (errorHandler.buildDepError "cmdargs"))
+            (hsPkgs."HTTP" or (errorHandler.buildDepError "HTTP"))
+            (hsPkgs."network" or (errorHandler.buildDepError "network"))
+            (hsPkgs."bytestring" or (errorHandler.buildDepError "bytestring"))
+            (hsPkgs."ansi-terminal" or (errorHandler.buildDepError "ansi-terminal"))
+            (hsPkgs."terminal-size" or (errorHandler.buildDepError "terminal-size"))
+            (hsPkgs."filepath" or (errorHandler.buildDepError "filepath"))
+            (hsPkgs."directory" or (errorHandler.buildDepError "directory"))
+            (hsPkgs."stringsearch" or (errorHandler.buildDepError "stringsearch"))
+            (hsPkgs."zlib" or (errorHandler.buildDepError "zlib"))
+            (hsPkgs."time" or (errorHandler.buildDepError "time"))
+            ];
+          buildable = true;
+          };
+        };
+      };
+    }

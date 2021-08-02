@@ -1,0 +1,40 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = {};
+    package = {
+      specVersion = "1.8";
+      identifier = { name = "crypto-cipher-benchmarks"; version = "0.0.1"; };
+      license = "BSD-3-Clause";
+      copyright = "Vincent Hanquez <vincent@snarc.org>";
+      maintainer = "vincent@snarc.org";
+      author = "Vincent Hanquez <vincent@snarc.org>";
+      homepage = "http://github.com/vincenthz/hs-crypto-cipher";
+      url = "";
+      synopsis = "Generic cryptography cipher benchmarks";
+      description = "Generic cryptography cipher benchmarks";
+      buildType = "Simple";
+      };
+    components = {
+      "library" = {
+        depends = [
+          (hsPkgs."base" or (errorHandler.buildDepError "base"))
+          (hsPkgs."bytestring" or (errorHandler.buildDepError "bytestring"))
+          (hsPkgs."byteable" or (errorHandler.buildDepError "byteable"))
+          (hsPkgs."securemem" or (errorHandler.buildDepError "securemem"))
+          (hsPkgs."criterion" or (errorHandler.buildDepError "criterion"))
+          (hsPkgs."crypto-cipher-types" or (errorHandler.buildDepError "crypto-cipher-types"))
+          (hsPkgs."mtl" or (errorHandler.buildDepError "mtl"))
+          (hsPkgs."pretty" or (errorHandler.buildDepError "pretty"))
+          ];
+        buildable = true;
+        };
+      };
+    }

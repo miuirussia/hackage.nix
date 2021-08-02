@@ -1,0 +1,44 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = {};
+    package = {
+      specVersion = "1.6";
+      identifier = { name = "font-opengl-basic4x6"; version = "0.0.1"; };
+      license = "LicenseRef-PublicDomain";
+      copyright = "";
+      maintainer = "Brian Lewis <brian@lorf.org>";
+      author = "Brian Lewis <brian@lorf.org>";
+      homepage = "";
+      url = "";
+      synopsis = "Basic4x6 font for OpenGL";
+      description = "Basic4x6 font for OpenGL containing digits and symbols. It is\ncalled \\\"4x6\\\" because it was drawn in 4x6 grids on graph paper.\n\nThis library might not be a good idea, but I needed to display\nsome simple values and didn't want to introduce any heavy\ndependencies.\n\nRun executable 'show-font-basic4x6' for a demo.";
+      buildType = "Custom";
+      };
+    components = {
+      "library" = {
+        depends = [
+          (hsPkgs."OpenGL" or (errorHandler.buildDepError "OpenGL"))
+          (hsPkgs."base" or (errorHandler.buildDepError "base"))
+          ];
+        buildable = true;
+        };
+      exes = {
+        "show-font-basic4x6" = {
+          depends = [
+            (hsPkgs."GLFW-b" or (errorHandler.buildDepError "GLFW-b"))
+            (hsPkgs."OpenGL" or (errorHandler.buildDepError "OpenGL"))
+            (hsPkgs."base" or (errorHandler.buildDepError "base"))
+            ];
+          buildable = true;
+          };
+        };
+      };
+    }

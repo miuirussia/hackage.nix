@@ -1,0 +1,61 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = {};
+    package = {
+      specVersion = "1.8";
+      identifier = { name = "hxournal"; version = "0.5.1"; };
+      license = "BSD-3-Clause";
+      copyright = "";
+      maintainer = "Ian-Woo Kim <ianwookim@gmail.com>";
+      author = "Ian-Woo Kim";
+      homepage = "http://ianwookim.org/hxournal";
+      url = "";
+      synopsis = "A pen notetaking program written in haskell ";
+      description = "notetaking program written in haskell and gtk2hs";
+      buildType = "Custom";
+      };
+    components = {
+      "library" = {
+        depends = [
+          (hsPkgs."base" or (errorHandler.buildDepError "base"))
+          (hsPkgs."mtl" or (errorHandler.buildDepError "mtl"))
+          (hsPkgs."directory" or (errorHandler.buildDepError "directory"))
+          (hsPkgs."filepath" or (errorHandler.buildDepError "filepath"))
+          (hsPkgs."strict" or (errorHandler.buildDepError "strict"))
+          (hsPkgs."gtk" or (errorHandler.buildDepError "gtk"))
+          (hsPkgs."cairo" or (errorHandler.buildDepError "cairo"))
+          (hsPkgs."monad-coroutine" or (errorHandler.buildDepError "monad-coroutine"))
+          (hsPkgs."transformers" or (errorHandler.buildDepError "transformers"))
+          (hsPkgs."xournal-parser" or (errorHandler.buildDepError "xournal-parser"))
+          (hsPkgs."xournal-render" or (errorHandler.buildDepError "xournal-render"))
+          (hsPkgs."containers" or (errorHandler.buildDepError "containers"))
+          (hsPkgs."template-haskell" or (errorHandler.buildDepError "template-haskell"))
+          (hsPkgs."blaze-builder" or (errorHandler.buildDepError "blaze-builder"))
+          (hsPkgs."bytestring" or (errorHandler.buildDepError "bytestring"))
+          (hsPkgs."double-conversion" or (errorHandler.buildDepError "double-conversion"))
+          (hsPkgs."fclabels" or (errorHandler.buildDepError "fclabels"))
+          (hsPkgs."cmdargs" or (errorHandler.buildDepError "cmdargs"))
+          (hsPkgs."configurator" or (errorHandler.buildDepError "configurator"))
+          ];
+        buildable = true;
+        };
+      exes = {
+        "hxournal" = {
+          depends = [
+            (hsPkgs."base" or (errorHandler.buildDepError "base"))
+            (hsPkgs."cmdargs" or (errorHandler.buildDepError "cmdargs"))
+            (hsPkgs."hxournal" or (errorHandler.buildDepError "hxournal"))
+            ];
+          buildable = true;
+          };
+        };
+      };
+    }

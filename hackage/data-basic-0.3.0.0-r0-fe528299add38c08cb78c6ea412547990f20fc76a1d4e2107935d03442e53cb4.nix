@@ -1,0 +1,66 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = {};
+    package = {
+      specVersion = "1.10";
+      identifier = { name = "data-basic"; version = "0.3.0.0"; };
+      license = "MIT";
+      copyright = "";
+      maintainer = "nikola@henezi.com, luka.horvat9@gmail.com";
+      author = "Nikola Henezi, Luka Horvat";
+      homepage = "https://gitlab.com/haskell-hr/basic";
+      url = "";
+      synopsis = "A database library with a focus on ease of use, type safety and useful error messages";
+      description = "Please see README.md";
+      buildType = "Simple";
+      };
+    components = {
+      "library" = {
+        depends = [
+          (hsPkgs."base" or (errorHandler.buildDepError "base"))
+          (hsPkgs."simple-effects" or (errorHandler.buildDepError "simple-effects"))
+          (hsPkgs."lens" or (errorHandler.buildDepError "lens"))
+          (hsPkgs."postgresql-simple" or (errorHandler.buildDepError "postgresql-simple"))
+          (hsPkgs."text" or (errorHandler.buildDepError "text"))
+          (hsPkgs."hssqlppp" or (errorHandler.buildDepError "hssqlppp"))
+          (hsPkgs."template-haskell" or (errorHandler.buildDepError "template-haskell"))
+          (hsPkgs."cases" or (errorHandler.buildDepError "cases"))
+          (hsPkgs."containers" or (errorHandler.buildDepError "containers"))
+          (hsPkgs."time" or (errorHandler.buildDepError "time"))
+          (hsPkgs."bytestring" or (errorHandler.buildDepError "bytestring"))
+          (hsPkgs."overload" or (errorHandler.buildDepError "overload"))
+          (hsPkgs."aeson" or (errorHandler.buildDepError "aeson"))
+          (hsPkgs."lens-aeson" or (errorHandler.buildDepError "lens-aeson"))
+          (hsPkgs."binary" or (errorHandler.buildDepError "binary"))
+          (hsPkgs."string-conv" or (errorHandler.buildDepError "string-conv"))
+          (hsPkgs."mtl" or (errorHandler.buildDepError "mtl"))
+          (hsPkgs."simple-logging" or (errorHandler.buildDepError "simple-logging"))
+          (hsPkgs."scientific" or (errorHandler.buildDepError "scientific"))
+          (hsPkgs."attoparsec" or (errorHandler.buildDepError "attoparsec"))
+          ];
+        buildable = true;
+        };
+      tests = {
+        "basic-test" = {
+          depends = [
+            (hsPkgs."base" or (errorHandler.buildDepError "base"))
+            (hsPkgs."data-basic" or (errorHandler.buildDepError "data-basic"))
+            (hsPkgs."postgresql-simple" or (errorHandler.buildDepError "postgresql-simple"))
+            (hsPkgs."time" or (errorHandler.buildDepError "time"))
+            (hsPkgs."lens" or (errorHandler.buildDepError "lens"))
+            (hsPkgs."aeson" or (errorHandler.buildDepError "aeson"))
+            (hsPkgs."string-conv" or (errorHandler.buildDepError "string-conv"))
+            ];
+          buildable = true;
+          };
+        };
+      };
+    }

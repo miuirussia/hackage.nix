@@ -1,0 +1,42 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = { wai2apiary = false; };
+    package = {
+      specVersion = "1.10";
+      identifier = { name = "apiary-eventsource"; version = "0.16.0"; };
+      license = "MIT";
+      copyright = "(c) 2014 Hirotomo Moriwaki";
+      maintainer = "HirotomoMoriwaki<philopon.dependence@gmail.com>";
+      author = "HirotomoMoriwaki<philopon.dependence@gmail.com>";
+      homepage = "https://github.com/philopon/apiary";
+      url = "";
+      synopsis = "eventsource support for apiary web framework.";
+      description = "example: <https://github.com/philopon/apiary/blob/master/examples/eventsource.hs>";
+      buildType = "Simple";
+      };
+    components = {
+      "library" = {
+        depends = [
+          (hsPkgs."base" or (errorHandler.buildDepError "base"))
+          (hsPkgs."apiary" or (errorHandler.buildDepError "apiary"))
+          (hsPkgs."blaze-builder" or (errorHandler.buildDepError "blaze-builder"))
+          ] ++ (if flags.wai2apiary
+          then [
+            (hsPkgs."wai-eventsource" or (errorHandler.buildDepError "wai-eventsource"))
+            (hsPkgs."conduit" or (errorHandler.buildDepError "conduit"))
+            ]
+          else [
+            (hsPkgs."wai-extra" or (errorHandler.buildDepError "wai-extra"))
+            ]);
+        buildable = true;
+        };
+      };
+    }

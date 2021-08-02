@@ -1,0 +1,45 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = {};
+    package = {
+      specVersion = "1.6";
+      identifier = { name = "hakyll"; version = "0.4.1"; };
+      license = "BSD-3-Clause";
+      copyright = "";
+      maintainer = "jaspervdj@gmail.com";
+      author = "Jasper Van der Jeugt";
+      homepage = "http://jaspervdj.be/hakyll";
+      url = "";
+      synopsis = "A simple static site generator library.";
+      description = "A simple static site generator library, mainly aimed at\ncreating blogs and brochure sites.";
+      buildType = "Simple";
+      };
+    components = {
+      "library" = {
+        depends = [
+          (hsPkgs."base" or (errorHandler.buildDepError "base"))
+          (hsPkgs."template" or (errorHandler.buildDepError "template"))
+          (hsPkgs."filepath" or (errorHandler.buildDepError "filepath"))
+          (hsPkgs."directory" or (errorHandler.buildDepError "directory"))
+          (hsPkgs."containers" or (errorHandler.buildDepError "containers"))
+          (hsPkgs."bytestring" or (errorHandler.buildDepError "bytestring"))
+          (hsPkgs."pandoc" or (errorHandler.buildDepError "pandoc"))
+          (hsPkgs."regex-base" or (errorHandler.buildDepError "regex-base"))
+          (hsPkgs."regex-tdfa" or (errorHandler.buildDepError "regex-tdfa"))
+          (hsPkgs."network" or (errorHandler.buildDepError "network"))
+          (hsPkgs."mtl" or (errorHandler.buildDepError "mtl"))
+          (hsPkgs."old-locale" or (errorHandler.buildDepError "old-locale"))
+          (hsPkgs."time" or (errorHandler.buildDepError "time"))
+          ];
+        buildable = true;
+        };
+      };
+    }

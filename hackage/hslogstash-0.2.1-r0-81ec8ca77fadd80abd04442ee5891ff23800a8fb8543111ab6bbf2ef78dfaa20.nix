@@ -1,0 +1,46 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = {};
+    package = {
+      specVersion = "1.8";
+      identifier = { name = "hslogstash"; version = "0.2.1"; };
+      license = "BSD-3-Clause";
+      copyright = "";
+      maintainer = "bartavelle@gmail.com";
+      author = "Simon Marechal";
+      homepage = "";
+      url = "";
+      synopsis = "A library to work with, or as, a logstash server";
+      description = "This library contains a few modules that let you work with Logstash messages, read them from a Redis list, store them into Elasticsearch, and more.";
+      buildType = "Simple";
+      };
+    components = {
+      "library" = {
+        depends = [
+          (hsPkgs."base" or (errorHandler.buildDepError "base"))
+          (hsPkgs."aeson" or (errorHandler.buildDepError "aeson"))
+          (hsPkgs."network" or (errorHandler.buildDepError "network"))
+          (hsPkgs."bytestring" or (errorHandler.buildDepError "bytestring"))
+          (hsPkgs."text" or (errorHandler.buildDepError "text"))
+          (hsPkgs."vector" or (errorHandler.buildDepError "vector"))
+          (hsPkgs."unordered-containers" or (errorHandler.buildDepError "unordered-containers"))
+          (hsPkgs."time" or (errorHandler.buildDepError "time"))
+          (hsPkgs."text-format" or (errorHandler.buildDepError "text-format"))
+          (hsPkgs."attoparsec" or (errorHandler.buildDepError "attoparsec"))
+          (hsPkgs."hedis" or (errorHandler.buildDepError "hedis"))
+          (hsPkgs."conduit" or (errorHandler.buildDepError "conduit"))
+          (hsPkgs."transformers" or (errorHandler.buildDepError "transformers"))
+          (hsPkgs."http-conduit" or (errorHandler.buildDepError "http-conduit"))
+          ];
+        buildable = true;
+        };
+      };
+    }

@@ -1,0 +1,31 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = {};
+    package = {
+      specVersion = "1.10";
+      identifier = { name = "lambda-ast"; version = "0.0.1"; };
+      license = "BSD-3-Clause";
+      copyright = "(c) 2012 Jonathan Fischoff ";
+      maintainer = "jonathangfischoff@gmail.com";
+      author = "Jonathan Fischoff";
+      homepage = "";
+      url = "";
+      synopsis = "Untyped Lambda Calculus Abstract Syntax Tree";
+      description = "An AST for the untyped lambda calculus. The AST is parameterized by symbol type.";
+      buildType = "Simple";
+      };
+    components = {
+      "library" = {
+        depends = [ (hsPkgs."base" or (errorHandler.buildDepError "base")) ];
+        buildable = true;
+        };
+      };
+    }

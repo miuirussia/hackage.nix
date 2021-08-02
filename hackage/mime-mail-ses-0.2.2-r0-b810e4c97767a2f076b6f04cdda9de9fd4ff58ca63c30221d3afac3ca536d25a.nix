@@ -1,0 +1,49 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = {};
+    package = {
+      specVersion = "1.6";
+      identifier = { name = "mime-mail-ses"; version = "0.2.2"; };
+      license = "MIT";
+      copyright = "";
+      maintainer = "michael@snoyman.com";
+      author = "Michael Snoyman";
+      homepage = "http://github.com/snoyberg/mime-mail";
+      url = "";
+      synopsis = "Send mime-mail messages via Amazon SES";
+      description = "";
+      buildType = "Simple";
+      };
+    components = {
+      "library" = {
+        depends = [
+          (hsPkgs."base" or (errorHandler.buildDepError "base"))
+          (hsPkgs."crypto-api" or (errorHandler.buildDepError "crypto-api"))
+          (hsPkgs."cereal" or (errorHandler.buildDepError "cereal"))
+          (hsPkgs."base64-bytestring" or (errorHandler.buildDepError "base64-bytestring"))
+          (hsPkgs."bytestring" or (errorHandler.buildDepError "bytestring"))
+          (hsPkgs."time" or (errorHandler.buildDepError "time"))
+          (hsPkgs."old-locale" or (errorHandler.buildDepError "old-locale"))
+          (hsPkgs."http-client" or (errorHandler.buildDepError "http-client"))
+          (hsPkgs."http-client-conduit" or (errorHandler.buildDepError "http-client-conduit"))
+          (hsPkgs."mime-mail" or (errorHandler.buildDepError "mime-mail"))
+          (hsPkgs."transformers" or (errorHandler.buildDepError "transformers"))
+          (hsPkgs."http-types" or (errorHandler.buildDepError "http-types"))
+          (hsPkgs."cryptohash-cryptoapi" or (errorHandler.buildDepError "cryptohash-cryptoapi"))
+          (hsPkgs."xml-conduit" or (errorHandler.buildDepError "xml-conduit"))
+          (hsPkgs."xml-types" or (errorHandler.buildDepError "xml-types"))
+          (hsPkgs."text" or (errorHandler.buildDepError "text"))
+          (hsPkgs."conduit" or (errorHandler.buildDepError "conduit"))
+          ];
+        buildable = true;
+        };
+      };
+    }

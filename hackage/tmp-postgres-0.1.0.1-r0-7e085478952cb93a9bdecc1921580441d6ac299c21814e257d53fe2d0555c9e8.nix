@@ -1,0 +1,54 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = {};
+    package = {
+      specVersion = "1.10";
+      identifier = { name = "tmp-postgres"; version = "0.1.0.1"; };
+      license = "BSD-3-Clause";
+      copyright = "2017 Jonathan Fischoff";
+      maintainer = "jonathangfischoff@gmail.com";
+      author = "Jonathan Fischoff";
+      homepage = "https://github.com/jfischoff/tmp-postgres#readme";
+      url = "";
+      synopsis = "Start and stop a temporary postgres for testing";
+      description = "This module provides functions greating a temporary postgres instance on a random port for testing.\n\n>\n> result <- 'start' []\n> case result of\n>   Left err -> print err\n>   Right tempDB -> do\n>     -- Do stuff\n>     'stop' tempDB\n@\n\nThe are few different methods for starting @postgres@ which provide different\nmethods of dealing with @stdout@ and @stderr@.\n\nThe start methods use a config based on the one used by [pg_tmp](http://ephemeralpg.org/), but can be overriden\nby in different values to the first argument of the start functions.";
+      buildType = "Simple";
+      };
+    components = {
+      "library" = {
+        depends = [
+          (hsPkgs."base" or (errorHandler.buildDepError "base"))
+          (hsPkgs."temporary" or (errorHandler.buildDepError "temporary"))
+          (hsPkgs."process" or (errorHandler.buildDepError "process"))
+          (hsPkgs."unix" or (errorHandler.buildDepError "unix"))
+          (hsPkgs."directory" or (errorHandler.buildDepError "directory"))
+          (hsPkgs."network" or (errorHandler.buildDepError "network"))
+          ];
+        buildable = true;
+        };
+      tests = {
+        "tmp-postgres-test" = {
+          depends = [
+            (hsPkgs."base" or (errorHandler.buildDepError "base"))
+            (hsPkgs."tmp-postgres" or (errorHandler.buildDepError "tmp-postgres"))
+            (hsPkgs."hspec" or (errorHandler.buildDepError "hspec"))
+            (hsPkgs."hspec-discover" or (errorHandler.buildDepError "hspec-discover"))
+            (hsPkgs."temporary" or (errorHandler.buildDepError "temporary"))
+            (hsPkgs."directory" or (errorHandler.buildDepError "directory"))
+            (hsPkgs."process" or (errorHandler.buildDepError "process"))
+            (hsPkgs."postgresql-simple" or (errorHandler.buildDepError "postgresql-simple"))
+            (hsPkgs."bytestring" or (errorHandler.buildDepError "bytestring"))
+            ];
+          buildable = true;
+          };
+        };
+      };
+    }

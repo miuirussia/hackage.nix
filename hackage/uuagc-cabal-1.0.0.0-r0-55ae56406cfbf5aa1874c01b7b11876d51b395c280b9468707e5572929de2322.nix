@@ -1,0 +1,41 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = {};
+    package = {
+      specVersion = "1.4";
+      identifier = { name = "uuagc-cabal"; version = "1.0.0.0"; };
+      license = "BSD-3-Clause";
+      copyright = "Universiteit Utrecht";
+      maintainer = "Arie Middelkoop <ariem@cs.uu.nl>";
+      author = "";
+      homepage = "http://www.cs.uu.nl/wiki/HUT/WebHome";
+      url = "";
+      synopsis = "Cabal plugin for the Universiteit Utrecht Attribute Grammar System";
+      description = "Cabal plugin for UUAGC";
+      buildType = "Simple";
+      };
+    components = {
+      "library" = {
+        depends = [
+          (hsPkgs."base" or (errorHandler.buildDepError "base"))
+          (hsPkgs."base" or (errorHandler.buildDepError "base"))
+          (hsPkgs."Cabal" or (errorHandler.buildDepError "Cabal"))
+          (hsPkgs."directory" or (errorHandler.buildDepError "directory"))
+          (hsPkgs."process" or (errorHandler.buildDepError "process"))
+          (hsPkgs."uulib" or (errorHandler.buildDepError "uulib"))
+          (hsPkgs."filepath" or (errorHandler.buildDepError "filepath"))
+          (hsPkgs."mtl" or (errorHandler.buildDepError "mtl"))
+          (hsPkgs."haskell98" or (errorHandler.buildDepError "haskell98"))
+          ];
+        buildable = true;
+        };
+      };
+    }

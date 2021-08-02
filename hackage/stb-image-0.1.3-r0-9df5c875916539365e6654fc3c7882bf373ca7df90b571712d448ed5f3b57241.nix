@@ -1,0 +1,35 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = { splitbase = true; base4 = true; };
+    package = {
+      specVersion = "1.2";
+      identifier = { name = "stb-image"; version = "0.1.3"; };
+      license = "LicenseRef-PublicDomain";
+      copyright = "";
+      maintainer = "bkomuves (plus) hackage (at) gmail (dot) com";
+      author = "Balazs Komuves";
+      homepage = "http://code.haskell.org/~bkomuves/";
+      url = "";
+      synopsis = "A wrapper around Sean Barrett's JPEG/PNG decoder";
+      description = "Partial implementation of JPEG, PNG, TGA, BMP, PSD decoders,\nwith a really simple API.";
+      buildType = "Simple";
+      };
+    components = {
+      "library" = {
+        depends = if flags.splitbase
+          then [
+            (hsPkgs."bytestring" or (errorHandler.buildDepError "bytestring"))
+            ] ++ [ (hsPkgs."base" or (errorHandler.buildDepError "base")) ]
+          else [ (hsPkgs."base" or (errorHandler.buildDepError "base")) ];
+        buildable = true;
+        };
+      };
+    }

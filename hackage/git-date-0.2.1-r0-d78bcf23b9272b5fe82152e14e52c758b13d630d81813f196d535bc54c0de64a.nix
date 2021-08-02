@@ -1,0 +1,51 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = {};
+    package = {
+      specVersion = "1.8";
+      identifier = { name = "git-date"; version = "0.2.1"; };
+      license = "GPL-2.0-only";
+      copyright = "© 2012 Stephen Paul Weber";
+      maintainer = "Stephen Paul Weber <singpolyma@singpolyma.net>";
+      author = "Stephen Paul Weber <singpolyma@singpolyma.net>";
+      homepage = "https://github.com/singpolyma/git-date-haskell";
+      url = "";
+      synopsis = "Bindings to the date parsing from Git.";
+      description = "This library implements a simple, pure binding onto the date parsing\ncode from git.  Why?  Because it was the only reasonable implementation\nof a generic date parser I could find.";
+      buildType = "Simple";
+      };
+    components = {
+      "library" = {
+        depends = [
+          (hsPkgs."base" or (errorHandler.buildDepError "base"))
+          (hsPkgs."bytestring" or (errorHandler.buildDepError "bytestring"))
+          (hsPkgs."utf8-string" or (errorHandler.buildDepError "utf8-string"))
+          (hsPkgs."time" or (errorHandler.buildDepError "time"))
+          ];
+        buildable = true;
+        };
+      tests = {
+        "tests" = {
+          depends = [
+            (hsPkgs."base" or (errorHandler.buildDepError "base"))
+            (hsPkgs."bytestring" or (errorHandler.buildDepError "bytestring"))
+            (hsPkgs."utf8-string" or (errorHandler.buildDepError "utf8-string"))
+            (hsPkgs."time" or (errorHandler.buildDepError "time"))
+            (hsPkgs."old-locale" or (errorHandler.buildDepError "old-locale"))
+            (hsPkgs."QuickCheck" or (errorHandler.buildDepError "QuickCheck"))
+            (hsPkgs."test-framework" or (errorHandler.buildDepError "test-framework"))
+            (hsPkgs."test-framework-quickcheck2" or (errorHandler.buildDepError "test-framework-quickcheck2"))
+            ];
+          buildable = true;
+          };
+        };
+      };
+    }

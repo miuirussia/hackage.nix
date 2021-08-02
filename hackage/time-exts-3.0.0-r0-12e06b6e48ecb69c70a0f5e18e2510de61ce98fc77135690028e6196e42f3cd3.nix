@@ -1,0 +1,64 @@
+{ system
+  , compiler
+  , flags
+  , pkgs
+  , hsPkgs
+  , pkgconfPkgs
+  , errorHandler
+  , config
+  , ... }:
+  {
+    flags = {};
+    package = {
+      specVersion = "1.10";
+      identifier = { name = "time-exts"; version = "3.0.0"; };
+      license = "BSD-3-Clause";
+      copyright = "2013-2016 Enzo Haussecker";
+      maintainer = "enzo@sovereign.io";
+      author = "Enzo Haussecker";
+      homepage = "";
+      url = "";
+      synopsis = "Yet another time library";
+      description = "";
+      buildType = "Simple";
+      };
+    components = {
+      "library" = {
+        depends = [
+          (hsPkgs."attoparsec" or (errorHandler.buildDepError "attoparsec"))
+          (hsPkgs."base" or (errorHandler.buildDepError "base"))
+          (hsPkgs."bindings-DSL" or (errorHandler.buildDepError "bindings-DSL"))
+          (hsPkgs."deepseq" or (errorHandler.buildDepError "deepseq"))
+          (hsPkgs."lens-simple" or (errorHandler.buildDepError "lens-simple"))
+          (hsPkgs."mtl" or (errorHandler.buildDepError "mtl"))
+          (hsPkgs."old-locale" or (errorHandler.buildDepError "old-locale"))
+          (hsPkgs."random" or (errorHandler.buildDepError "random"))
+          (hsPkgs."text" or (errorHandler.buildDepError "text"))
+          (hsPkgs."time" or (errorHandler.buildDepError "time"))
+          (hsPkgs."tz" or (errorHandler.buildDepError "tz"))
+          ];
+        buildable = true;
+        };
+      tests = {
+        "time-exts-unit-tests" = {
+          depends = [
+            (hsPkgs."attoparsec" or (errorHandler.buildDepError "attoparsec"))
+            (hsPkgs."base" or (errorHandler.buildDepError "base"))
+            (hsPkgs."bindings-DSL" or (errorHandler.buildDepError "bindings-DSL"))
+            (hsPkgs."deepseq" or (errorHandler.buildDepError "deepseq"))
+            (hsPkgs."HUnit" or (errorHandler.buildDepError "HUnit"))
+            (hsPkgs."ieee754" or (errorHandler.buildDepError "ieee754"))
+            (hsPkgs."lens-simple" or (errorHandler.buildDepError "lens-simple"))
+            (hsPkgs."mtl" or (errorHandler.buildDepError "mtl"))
+            (hsPkgs."old-locale" or (errorHandler.buildDepError "old-locale"))
+            (hsPkgs."QuickCheck" or (errorHandler.buildDepError "QuickCheck"))
+            (hsPkgs."random" or (errorHandler.buildDepError "random"))
+            (hsPkgs."text" or (errorHandler.buildDepError "text"))
+            (hsPkgs."time" or (errorHandler.buildDepError "time"))
+            (hsPkgs."tz" or (errorHandler.buildDepError "tz"))
+            ];
+          buildable = true;
+          };
+        };
+      };
+    }

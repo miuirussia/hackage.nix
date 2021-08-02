@@ -1,2 +1,6 @@
 # Drop all index.tar.gz's
 *-index.tar.gz
+
+# Drop nix output
+update-hackage.sh
+result

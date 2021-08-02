@@ -22,7 +22,7 @@ jobs:
           extra_nix_config: |
             trusted-public-keys = hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ= s3.kdevlab.com:PhuKrzVfCsS0T1R4FnslJy2qUBul9oQ2CTSO/fg/llM= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
             substituters = https://hydra.iohk.io https://nix-cache.s3.kdevlab.com https://cache.nixos.org/
-      - name: Install niv, jq, nix-prefetch-git, node2nix
+      - name: Install deps
         run: |
           nix-env -iA niv gnugrep bash -f https://github.com/miuirussia/nixpkgs/tarball/nixpkgs-unstable
       - name: Update dependencies
@@ -35,7 +35,7 @@ jobs:
           rm -rf hackage
           nix-build build.nix -A update-hackage -o update-hackage.sh
           ./update-hackage.sh
-          g add .
+          git add .
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:

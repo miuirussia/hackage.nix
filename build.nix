@@ -1,13 +1,7 @@
 let
   sources = import ./sources {};
-  haskell-nix = import sources."haskell.nix" {};
-  pkgs = let
-    args = haskell-nix.nixpkgsArgs // {
-      config = {};
-      overlays = haskell-nix.overlays;
-    };
-  in
-    import sources.nixpkgs-unstable args;
+  haskell-nix = import sources."haskell.nix" { inherit sources; };
+  pkgs = import sources.nixpkgs-unstable haskell-nix.nixpkgsArgs;
 
   update-index-state-hashes = indexStateHashesPath: with pkgs; with lib; writeShellScriptBin "update-index-state-hashes" ''
     export PATH="${makeBinPath [ coreutils pkgs.haskell-nix.nix-tools.ghc8105 nix curl ]}"
